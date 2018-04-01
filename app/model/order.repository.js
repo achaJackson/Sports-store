@@ -9,21 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
-const product_repository_1 = require("./product.repository");
 const static_datasource_1 = require("./static.datasource");
-const cart_model_1 = require('./cart.model');
-const order_repository_1 = require("./order.repository");
-const order_model_1 = require("./order.model");
-const rest_datasource_1 = require("./rest.datasource");
-const http_1 = require("@angular/http");
-let ModelModule = class ModelModule {
+let OrderRepository = class OrderRepository {
+    constructor(dataSource) {
+        this.dataSource = dataSource;
+        this.orders = [];
+    }
+    getOrders() {
+        return this.orders;
+    }
+    saveOrder(order) {
+        return this.dataSource.saveOrder(order);
+    }
 };
-ModelModule = __decorate([
-    core_1.NgModule({
-        imports: [http_1.HttpModule],
-        providers: [product_repository_1.ProductRepository, cart_model_1.Cart, order_repository_1.OrderRepository, order_model_1.Order,
-            { provide: static_datasource_1.StaticDataSource, useClass: rest_datasource_1.RestDataSource }]
-    }), 
-    __metadata('design:paramtypes', [])
-], ModelModule);
-exports.ModelModule = ModelModule;
+OrderRepository = __decorate([
+    core_1.Injectable(), 
+    __metadata('design:paramtypes', [static_datasource_1.StaticDataSource])
+], OrderRepository);
+exports.OrderRepository = OrderRepository;

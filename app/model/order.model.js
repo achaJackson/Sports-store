@@ -9,17 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
-const cart_model_1 = require("../model/cart.model");
-let CartDetailComponent = class CartDetailComponent {
+const cart_model_1 = require("./cart.model");
+let Order = class Order {
     constructor(cart) {
         this.cart = cart;
+        this.shipped = false;
+    }
+    clear() {
+        this.id = null;
+        this.name = this.address = this.city = null;
+        this.state = this.country = this.zip = null;
+        this.shipped = false;
+        this.cart.clear();
     }
 };
-CartDetailComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        templateUrl: "cartDetail.component.html"
-    }), 
+Order = __decorate([
+    core_1.Injectable(), 
     __metadata('design:paramtypes', [cart_model_1.Cart])
-], CartDetailComponent);
-exports.CartDetailComponent = CartDetailComponent;
+], Order);
+exports.Order = Order;

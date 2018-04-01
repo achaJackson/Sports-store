@@ -9,17 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
-const cart_model_1 = require("../model/cart.model");
-let CartDetailComponent = class CartDetailComponent {
-    constructor(cart) {
-        this.cart = cart;
+const router_1 = require("@angular/router");
+let AuthComponent = class AuthComponent {
+    constructor(router) {
+        this.router = router;
+    }
+    authenticate(form) {
+        if (form.valid) {
+            //perform authentication
+            this.router.navigateByUrl("/admin/main");
+        }
+        else {
+            this.errorMessage = "Form Data Invalid";
+        }
     }
 };
-CartDetailComponent = __decorate([
+AuthComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        templateUrl: "cartDetail.component.html"
+        templateUrl: "auth.componenet.html"
     }), 
-    __metadata('design:paramtypes', [cart_model_1.Cart])
-], CartDetailComponent);
-exports.CartDetailComponent = CartDetailComponent;
+    __metadata('design:paramtypes', [router_1.Router])
+], AuthComponent);
+exports.AuthComponent = AuthComponent;

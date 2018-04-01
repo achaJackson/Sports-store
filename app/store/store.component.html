@@ -9,6 +9,9 @@
     <button *ngFor="let cat of categories" class="btn btn-outline-primary btn-block" [class.active]="cat == selectedCategory" (click)="changeCategory(cat)">
         {{cat}}
     </button>
+    <button class="btn btn-block btn-danger m-t-3" routerLink="/admin">
+    Admin
+    </button>
 </div>
 
 <div class="col-xs-9 p-a-1">

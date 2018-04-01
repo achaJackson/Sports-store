@@ -46,7 +46,7 @@ let StoreComponent = class StoreComponent {
         return Array(Math.ceil(this.repository.getProducts(this.selectedCategory).length / this.productsPerPage))
             .fill(0).map((x, i) => i + 1);
     }
-    addProductsToCart(product) {
+    addProductToCart(product) {
         this.cart.addLine(product);
         this.router.navigateByUrl("/cart");
     }

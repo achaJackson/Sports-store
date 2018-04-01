@@ -9,12 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
+const order_repository_1 = require("../model/order.repository");
+const order_model_1 = require("../model/order.model");
 let CheckoutComponent = class CheckoutComponent {
+    constructor(repository, order) {
+        this.repository = repository;
+        this.order = order;
+        this.orderSent = false;
+        this.submitted = false;
+    }
+    submittedOrder(form) {
+        this.submitted = true;
+        if (form.valid) {
+            this.repository.saveOrder(this.order).subscribe((order) => {
+                this.orderSent = true;
+                this.order.clear();
+                this.submitted = false;
+            });
+        }
+    }
 };
 CheckoutComponent = __decorate([
     core_1.Component({
-        template: `<div><h3 class="bg-info p-a-1">Checkout Component</h3></div>`
+        moduleId: module.id,
+        templateUrl: "checkout.component.html",
+        styleUrls: ["checkout.component.css"]
     }), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [order_repository_1.OrderRepository, order_model_1.Order])
 ], CheckoutComponent);
 exports.CheckoutComponent = CheckoutComponent;

@@ -43,7 +43,7 @@ export class StoreComponent{
         .fill(0).map((x , i)=> i + 1);
     }
 
-    addProductsToCart(product : Product){
+    addProductToCart(product : Product){
         this.cart.addLine(product);
         this.router.navigateByUrl("/cart");
     }

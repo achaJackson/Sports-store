@@ -16,16 +16,29 @@ const store_component_1 = require("./store/store.component");
 const cartDetail_component_1 = require("./store/cartDetail.component");
 const checkout_component_1 = require("./store/checkout.component");
 const router_1 = require("@angular/router");
+const storeFirst_guard_1 = require("./storeFirst.guard");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, store_module_1.StoreModule, router_1.RouterModule.forRoot([
-                { path: "store", component: store_component_1.StoreComponent },
-                { path: "cart", component: cartDetail_component_1.CartDetailComponent },
-                { path: "checkout", component: checkout_component_1.CheckoutComponent },
+        imports: [platform_browser_1.BrowserModule, store_module_1.StoreModule,
+            router_1.RouterModule.forRoot([
+                { path: "store", component: store_component_1.StoreComponent,
+                    canActivate: [storeFirst_guard_1.StoreFirstGuard]
+                },
+                { path: "cart", component: cartDetail_component_1.CartDetailComponent,
+                    canActivate: [storeFirst_guard_1.StoreFirstGuard]
+                },
+                { path: "checkout", component: checkout_component_1.CheckoutComponent,
+                    canActivate: [storeFirst_guard_1.StoreFirstGuard]
+                },
+                { path: "admin",
+                    loadChildren: "app/admin/admin.module#AdminModule",
+                    canActivate: [storeFirst_guard_1.StoreFirstGuard]
+                },
                 { path: "**", redirectTo: "/store" }
             ])],
+        providers: [storeFirst_guard_1.StoreFirstGuard],
         declarations: [app_component_1.AppComponent],
         bootstrap: [app_component_1.AppComponent]
     }), 
